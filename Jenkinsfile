@@ -45,7 +45,7 @@ agent any
   } */
   stage('Call-Deploy'){
   steps {
-   build 'deploy-war'
+   build 'deploy-war', propagate: false, wait: false
   }
    }
 }
