@@ -16,7 +16,7 @@ agent any
         archiveArtifacts 'webapp/target/openmrs*'
       }
     }
-    /* stage('Sonar-Stage'){
+    stage('Sonar-Stage'){
       steps{
         withSonarQubeEnv('sonar'){
             sh 'mvn clean package sonar:sonar'
@@ -37,15 +37,15 @@ agent any
         }
         }
          }
-  } */
-  /*stage('upload-artifacts'){
+  }
+  stage('upload-artifacts'){
       steps {
         nexusArtifactUploader artifacts: [[artifactId: 'dev', classifier: '', file: "./webapp/target/openmrs.war", type: 'war']], credentialsId: 'nexus', groupId: 'dev_group', nexusUrl: '192.168.34.11:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'RepoR', version: '${BUILD_NUMBER}'
       }
-  } */
+  } 
   stage('Call-Deploy'){
   steps {
-   build job: 'deploy-war', propagate: false, wait: false
+   build 'deploy-war'
   }
    }
 }
